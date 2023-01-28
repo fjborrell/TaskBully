@@ -11,6 +11,7 @@
 		752807FF2985A4EE0061DCCF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752807FE2985A4EE0061DCCF /* Extensions.swift */; };
 		752808012985BFF20061DCCF /* AppLifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752808002985BFF20061DCCF /* AppLifecycle.swift */; };
 		752808032985D0F80061DCCF /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752808022985D0F80061DCCF /* SetupView.swift */; };
+		752808052985D7C70061DCCF /* AngerLevels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752808042985D7C70061DCCF /* AngerLevels.swift */; };
 		75AB626F29858CAD0090B311 /* TaskBullyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AB626E29858CAD0090B311 /* TaskBullyApp.swift */; };
 		75AB627329858CAE0090B311 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75AB627229858CAE0090B311 /* Assets.xcassets */; };
 		75AB627629858CAE0090B311 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75AB627529858CAE0090B311 /* Preview Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		752807FE2985A4EE0061DCCF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		752808002985BFF20061DCCF /* AppLifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycle.swift; sourceTree = "<group>"; };
 		752808022985D0F80061DCCF /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		752808042985D7C70061DCCF /* AngerLevels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngerLevels.swift; sourceTree = "<group>"; };
 		75AB626B29858CAD0090B311 /* TaskBully.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskBully.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75AB626E29858CAD0090B311 /* TaskBullyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskBullyApp.swift; sourceTree = "<group>"; };
 		75AB627229858CAE0090B311 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,9 +40,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		752808062985E6780061DCCF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B443D98298590B60062A8E0 /* RootView.swift */,
+				752808022985D0F80061DCCF /* SetupView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		75AB626229858CAD0090B311 = {
 			isa = PBXGroup;
 			children = (
+				75AB626E29858CAD0090B311 /* TaskBullyApp.swift */,
+				752808062985E6780061DCCF /* Views */,
 				75AB626D29858CAD0090B311 /* TaskBully */,
 				75AB626C29858CAD0090B311 /* Products */,
 			);
@@ -57,13 +70,11 @@
 		75AB626D29858CAD0090B311 /* TaskBully */ = {
 			isa = PBXGroup;
 			children = (
-				75AB626E29858CAD0090B311 /* TaskBullyApp.swift */,
+				752808002985BFF20061DCCF /* AppLifecycle.swift */,
+				752808042985D7C70061DCCF /* AngerLevels.swift */,
 				752807FE2985A4EE0061DCCF /* Extensions.swift */,
 				75AB627229858CAE0090B311 /* Assets.xcassets */,
 				75AB627429858CAE0090B311 /* Preview Content */,
-				2B443D98298590B60062A8E0 /* RootView.swift */,
-				752808002985BFF20061DCCF /* AppLifecycle.swift */,
-				752808022985D0F80061DCCF /* SetupView.swift */,
 			);
 			path = TaskBully;
 			sourceTree = "<group>";
@@ -146,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				752808052985D7C70061DCCF /* AngerLevels.swift in Sources */,
 				752808032985D0F80061DCCF /* SetupView.swift in Sources */,
 				75AB626F29858CAD0090B311 /* TaskBullyApp.swift in Sources */,
 				2B443D99298590B60062A8E0 /* RootView.swift in Sources */,

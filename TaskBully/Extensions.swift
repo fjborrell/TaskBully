@@ -17,27 +17,6 @@ extension Color {
     }
 }
 
-//struct NavLabel: View {
-//    var prompt: String
-//
-//    init(prompt: String) {
-//        self.prompt = prompt
-//    }
-//
-//    var body: some View {
-//        Label {
-//            Text(prompt)
-//                .font(.headline)
-//        } icon: {
-//            Image(systemName: "arrow.right.circle")
-//        }
-//        .tint(.purple)
-//        .buttonStyle(.bordered)
-//        .controlSize(.large)
-//        .padding(50)
-//    }
-//}
-
 struct NavButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
