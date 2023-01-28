@@ -36,10 +36,10 @@ struct RootView: View {
                     
                     //Image
                     Image("angrydude")
-                    
+                                        
                     //Get Started Button
                     NavigationLink {
-                        ContentView()
+                        SetupView()
                     } label: {
                         HStack {
                             Text("Get Started")
@@ -54,6 +54,7 @@ struct RootView: View {
                 }
             }
         }
+        .background(AppLifecycle())
     }
     
 }
