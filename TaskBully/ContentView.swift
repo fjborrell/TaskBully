@@ -15,8 +15,10 @@ struct ContentView: View {
                 .foregroundColor(.accentColor)
             Text("Task Bully")
         }
+        .navigationBarBackButtonHidden(true)
         .padding()
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

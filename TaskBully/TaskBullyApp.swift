@@ -11,7 +11,7 @@ import SwiftUI
 struct TaskBullyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
     }
 }
