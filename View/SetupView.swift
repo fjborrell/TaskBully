@@ -63,6 +63,21 @@ struct SetupView: View {
                         
                         
                     }
+                    
+                    //TO TASK LIST
+                    NavigationLink {
+                        Home()
+                    } label: {
+                        HStack {
+                            Text("Finish")
+                                .font(.title3.bold())
+                            Image(systemName: "arrow.right.circle")
+                        }
+                    }
+                    .tint(.purple)
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
+                    .padding(50)
                 }
                 .padding(50)
             }
