@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Home: View {
     // Mark: Animation pros
-    @State var currentItem: ColorValue?
+    @State var currentItem: TBTask?
     @State var expandCard: Bool = false
     @State var moveCardDown: Bool = false
     @State var animateContent: Bool = false
@@ -29,8 +29,8 @@ struct Home: View {
                 
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 8){
-                        ForEach(colors){color in
-                            CardView(item: color,rectSize: size)
+                        ForEach(tasks){task in
+                            CardView(item: task, rectSize: size)
                         }
                     }
                     .padding(.horizontal, 10)
@@ -51,7 +51,7 @@ struct Home: View {
     
     
     @ViewBuilder
-    func DetailView(item: ColorValue, rectSize: CGSize) -> some View{
+    func DetailView(item: TBTask, rectSize: CGSize) -> some View{
         ColorView(item: item, rectSize: rectSize)
             .ignoresSafeArea()
             .overlay(alignment: .top) {
@@ -63,11 +63,8 @@ struct Home: View {
     }
     
     @ViewBuilder
-    func DetailViewContent(item: ColorValue) -> some View{
-        VStack(spacing: 0){
-            
-            
-            
+    func DetailViewContent(item: TBTask) -> some View{
+        VStack(){
             //BACK BUTTON
             HStack(spacing: 15){
                 Button(action: {
@@ -90,9 +87,9 @@ struct Home: View {
             
                 Spacer()
             }
-            .padding([.bottom, .top], 20)
+            .padding([.bottom, .top], 30)
             .opacity(animateContent ? 1 : 0)
-            .offset(y: animateContent ? 0 : 100)
+            .offset(y: animateContent ? 0 : 10)
             //slight delay
             .animation(.easeInOut(duration: 0.4).delay(animateContent ? 0.25 : 0), value: animateContent)
             
@@ -101,11 +98,18 @@ struct Home: View {
                 .fill(.white)
                 .frame(height: 1)
                 .scaleEffect(x: animateContent ? 1 : 0.0001, anchor: .leading)
-                .padding(.top,80)
+                .padding(.top,20)
+            
+            Text(item.taskDescription)
+                .padding(20)
+                .foregroundColor(.white)
+                .padding(.bottom,30)
+                .opacity(animateContent ? 1 : 0)
+                .offset(y: animateContent ? 8 : 50)
+            //slight delay
+                .animation(.easeInOut(duration: 0.4).delay(animateContent ? 0.25 : 0), value: animateContent)
             VStack(spacing: 30){
-                CustomProgressView(value: 0.5, label: "Red")
-                CustomProgressView(value: 0.5, label: "Blue")
-                CustomProgressView(value: 0.5, label: "Green")
+                AngerLevelBar(value: angerToCG(level: user.preferredAnger), label: "Intensity:")
             }
             .padding(15)
             .background {
@@ -114,7 +118,7 @@ struct Home: View {
                     .environment(\.colorScheme, .dark)
             }
             .opacity(animateContent ? 1 : 0)
-            .offset(y: animateContent ? 0 : 100)
+            .offset(y: animateContent ? 8 : 50)
             //slight delay
             .animation(.easeInOut(duration: 0.4).delay(animateContent ? 0.2 : 0), value: animateContent)
             .padding(.top,30)
@@ -125,7 +129,7 @@ struct Home: View {
             TaskTimerView()
                 .padding(.bottom,30)
                 .opacity(animateContent ? 1 : 0)
-                .offset(y: animateContent ? 0 : 100)
+                .offset(y: animateContent ? 8 : 50)
             //slight delay
                 .animation(.easeInOut(duration: 0.4).delay(animateContent ? 0.25 : 0), value: animateContent)
         }
@@ -140,7 +144,7 @@ struct Home: View {
     
     
     @ViewBuilder
-    func CardView(item: ColorValue, rectSize: CGSize) -> some View{
+    func CardView(item: TBTask, rectSize: CGSize) -> some View{
         let tappedCard = item.id == currentItem?.id && moveCardDown
         
         if !(item.id == currentItem?.id && expandCard){
@@ -150,7 +154,7 @@ struct Home: View {
                 })
                 .frame(height: 100)
                 .contentShape(Rectangle())
-                .offset(y: tappedCard ? 30 : 0)
+                .offset(y: tappedCard ? 40 : 0)
                 .zIndex(tappedCard ? 100 : 0)
                 .onTapGesture {
                     currentItem = item
@@ -174,15 +178,15 @@ struct Home: View {
     }
     
     @ViewBuilder
-    func ColorView(item: ColorValue, rectSize: CGSize) -> some View{
+    func ColorView(item: TBTask, rectSize: CGSize) -> some View{
         Rectangle()
             .overlay {
                 Rectangle()
-                    .fill(item.color.gradient)
+                    .fill(item.taskColor.gradient)
             }
             .overlay {
                 Rectangle()
-                    .fill(item.color.opacity(0.5).gradient)
+                    .fill(item.taskColor.opacity(0.5).gradient)
                     .rotationEffect(.init(degrees: 180))
             }
             .matchedGeometryEffect(id: item.id.uuidString, in: animation)
@@ -190,34 +194,29 @@ struct Home: View {
     
     // Color Details
     @ViewBuilder
-    func ColorDetails(item: ColorValue, rectSize: CGSize)-> some View{
+    func ColorDetails(item: TBTask, rectSize: CGSize)-> some View{
         HStack{
-            Text("#\(item.colorCode)")
-                .font(.title.bold())
+            Text("\(item.taskTitle)")
+                .font(.title2.bold())
                 .foregroundColor(.white)
             
             Spacer()
             
-            VStack(alignment: .leading,spacing: 4) {
-                Text(item.title)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                Text("Hexadecimal")
-                    .font(.caption)
-                    .foregroundColor(.white.opacity(0.7))
-            }
-            .padding(20)
+            Image(systemName: "sun.max.fill")
+                .imageScale(.large)
+                .foregroundColor(.white)
         }
-        .padding(.leading, 15)
+        .padding(25)
         .padding(.vertical, 50)
         .matchedGeometryEffect(id: item.id.uuidString + "DETAILS", in: animation)
     }
     
     
     @ViewBuilder
-    func CustomProgressView(value: CGFloat,label: String) -> some View{
+    func AngerLevelBar(value: CGFloat, label: String) -> some View {
         HStack(spacing: 15){
             Text(label)
+                .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
             
@@ -235,11 +234,34 @@ struct Home: View {
             }
             .frame(height: 8)
             
-            Text("\(Int(value * 255.0))")
-                .fontWeight(.semibold)
+            Text("\(angerToString(level: user.preferredAnger))")
+                .font(.caption2)
+                .fontWeight(.bold)
                 .foregroundColor(.white)
         }
     }
     
+    func angerToCG(level: AngerLevels) -> CGFloat {
+        var value: CGFloat
+        switch level {
+        case .ENCOURAGING:
+            value = 0.0
+        case .PASSIVEAGGRESSIVE:
+            value = 0.5
+        case .ABUSIVE:
+            value = 1.0
+        }
+        return value
+    }
     
+    func angerToString(level: AngerLevels) -> String {
+        switch level {
+        case .ABUSIVE:
+            return "Bully"
+        case .PASSIVEAGGRESSIVE:
+            return "Passive Aggressive"
+        case .ENCOURAGING:
+            return "Encouraging"
+        }
+    }
 }

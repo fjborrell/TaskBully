@@ -107,7 +107,7 @@ func intToAnger(levelAsInt: Int) -> String {
     case 2:
         return "Passive Aggressive"
     case 3:
-        return "Abusive"
+        return "Bully"
     default:
         return "Passive Aggressive"
     }
