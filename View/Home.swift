@@ -32,9 +32,18 @@ struct Home: View {
                     
                     ScrollView(.vertical, showsIndicators: false){
                         VStack(spacing: 8){
-                            ForEach(tasks){task in
-                                CardView(item: task, rectSize: size)
+                            if showModal == false {
+                                ForEach(tasks){task in
+                                    CardView(item: task, rectSize: size)
+                                }
                             }
+                            
+                            if showModal == true {
+                                ForEach(tasks){task in
+                                    CardView(item: task, rectSize: size)
+                                }
+                            }
+                            
                         }
                         .padding(.horizontal, 10)
                         .padding(.vertical, 15)
@@ -72,7 +81,7 @@ struct Home: View {
     @ViewBuilder
     func DetailView(item: TBTask, rectSize: CGSize) -> some View {
         ColorView(item: item, rectSize: rectSize)
-            //.ignoresSafeArea()
+        //.ignoresSafeArea()
             .overlay(alignment: .top) {
                 ColorDetails(item: item, rectSize: rectSize)
             }

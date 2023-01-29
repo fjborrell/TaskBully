@@ -23,10 +23,12 @@ struct AppLifecycle: View {
             }
             //LONG BACKGROUND (SUSPENDED)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
-                timerManager.startTimer()
+                self.sentenceManager.delayedAlert(pAnger: user.getAnger())
+                self.sentenceManager.lastAlert(pAnger: user.getAnger())
             }
             //ACTIVE FOREGROUND
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                self.isActive = true
                 self.timerManager.stopTimer()
                 print("DEBUG: Welcome back!")
             }
@@ -44,7 +46,39 @@ class SentenceManager: ObservableObject {
         content.sound = UNNotificationSound.defaultCritical
         
         // show this notification five seconds from now
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
+    }
+    
+    func delayedAlert(pAnger: AngerLevels) {
+        let content = UNMutableNotificationContent()
+        content.title = "TaskBully says:"
+        content.subtitle = "\"\(sentenceBank.get(angerLevel: pAnger))\""
+        content.sound = UNNotificationSound.defaultCritical
+        
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15, repeats: false)
+        
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
+    }
+    
+    func lastAlert(pAnger: AngerLevels) {
+        let content = UNMutableNotificationContent()
+        content.title = "TaskBully says:"
+        content.subtitle = "\"\(sentenceBank.get(angerLevel: pAnger))\""
+        content.sound = UNNotificationSound.defaultCritical
+        
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 25, repeats: false)
         
         // choose a random identifier
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -60,8 +94,7 @@ class TimerManager: ObservableObject {
     //Make a new X second timer.
     func startTimer() {
         stopTimer()
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
-            print("DEBUG: You failed :(")
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { _ in
         }
     }
     
