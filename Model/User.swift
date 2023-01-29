@@ -7,7 +7,7 @@
 
 import Foundation
 
-class User {
+class User:  {
     var preferredAnger: AngerLevels
     var taskList: [TBTasks]
     

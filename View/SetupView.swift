@@ -11,6 +11,7 @@ import UserNotifications
 struct SetupView: View {
     @State var angerSliderValue: Double = 2
     @State var angerLevel: AngerLevels = .PASSIVEAGGRESSIVE
+    @State var authorizedNotifications = false
     
     var body: some View {
         ZStack {
@@ -35,28 +36,29 @@ struct SetupView: View {
                 //Image
                 Image("settingsgirl")
                     .resizable()
-                    .frame(width: 250, height: 250)
+                    .frame(width: 200, height: 200)
+                
+                //NOTIFICATION ACCESS
+                Button(action: {
+                    authorizedNotifications = true
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            print("All set!")
+                        } else if let error = error {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }) {
+                    Text("Authorize Notifications")
+                        .bold()
+                    Image(systemName: "bell.badge.fill")
+                }
+                .tint(.purple)
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                .padding(40)
                 
                 VStack {
-                    //NOTIFICATION ACCESS
-                    Button(action: {
-                        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                            if success {
-                                print("All set!")
-                            } else if let error = error {
-                                print(error.localizedDescription)
-                            }
-                        }
-                    }) {
-                        Text("Authorize Notifications")
-                            .bold()
-                        Image(systemName: "bell.badge.fill")
-                    }
-                    .tint(.purple)
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                    .padding(50)
-                    
                     //ANGER LEVEL SETTER
                     VStack {
                         Slider(value: $angerSliderValue, in: 1...3, step: 1)
@@ -69,26 +71,25 @@ struct SetupView: View {
                                 .padding(1)
                                 .bold()
                         }
-                        
-                        
                     }
-                    
-                    //TO TASK LIST
-                    NavigationLink {
-                        Home()
-                            .navigationBarBackButtonHidden()
-                    } label: {
-                        HStack {
-                            Text("Finish")
-                                .font(.title3.bold())
-                            Image(systemName: "arrow.right.circle")
-                        }
-                    }
-                    .tint(.purple)
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                    .padding(50)
                 }
+                .padding([.leading, .trailing], 50)
+                
+                //TO TASK LIST
+                NavigationLink {
+                    Home()
+                        .navigationBarBackButtonHidden()
+                } label: {
+                    HStack {
+                        Text("Finish")
+                            .font(.title3.bold())
+                        Image(systemName: "arrow.right.circle")
+                    }
+                }
+                .disabled(!authorizedNotifications)
+                .tint(.purple)
+                .buttonStyle(.bordered)
+                .controlSize(.large)
                 .padding(50)
             }
         }

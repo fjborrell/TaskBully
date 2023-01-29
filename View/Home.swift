@@ -19,27 +19,33 @@ struct Home: View {
     
     
     var body: some View {
-        GeometryReader{ proxy in
-            let size = proxy.size
+        ZStack {
+            //BACKGROUND
+            Color(hex: 0x171717)
             
-            ScrollView(.vertical, showsIndicators: false){
-                VStack(spacing: 8){
-                    ForEach(colors){color in
-                        CardView(item: color,rectSize: size)
+            GeometryReader{ proxy in
+                let size = proxy.size
+                
+                ScrollView(.vertical, showsIndicators: false){
+                    VStack(spacing: 8){
+                        ForEach(colors){color in
+                            CardView(item: color,rectSize: size)
+                        }
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 15)
+                }
+                .overlay {
+                    if let currentItem,expandCard{
+                        DetailView(item: currentItem, rectSize: size)
+                            .transition(.asymmetric(insertion: .identity, removal: .offset(y:10)))
                     }
                 }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 15)
             }
-            .overlay {
-                if let currentItem,expandCard{
-                    DetailView(item: currentItem, rectSize: size)
-                        .transition(.asymmetric(insertion: .identity, removal: .offset(y:10)))
-                }
-            }
+            .frame(width:370, height: 690)
+            .preferredColorScheme(.light)
         }
-        .frame(width:370, height: 690)
-        .preferredColorScheme(.light)
+        .ignoresSafeArea()
     }
     
     
