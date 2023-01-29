@@ -73,28 +73,6 @@ struct SetupView: View {
                                 .bold()
                         }
                     }
-<<<<<<< HEAD
-=======
-                    
-                    //TO TASK LIST
-                    NavigationLink {
-                        Home()
-                            .navigationBarBackButtonHidden()
-                    } label: {
-                        HStack {
-                            Text("Finish")
-                                .font(.title3.bold())
-                            Image(systemName: "arrow.right.circle")
-                        }
-                    }
-                    .tint(.purple)
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                    .padding(50)
-                    .onTapGesture {
-                        user.setAnger(pAngerLevel: Int(angerSliderValue))
-                    }
->>>>>>> f4e682a2395f621c65c66ca79b2c2e60274c94da
                 }
                 .padding([.leading, .trailing], 50)
                 
