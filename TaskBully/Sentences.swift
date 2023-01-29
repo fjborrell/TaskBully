@@ -12,11 +12,10 @@ import UserNotifications
 
 struct SentenceBank {
     private var abuse = ["A fucking break already?",
-                         "Back to work bitch",
+                         "You gotta be shitting me...",
                          "Holy fuck, you're lazy",
                          "Damn, you are embarrassing 🙈",
                          "Fuck! again??",
-                         "You probably lost so much money in NFT scams",
                          "You're fucking hopeless 😂",
                          "Just drop out already.",
                          "Back to work four-eyes 🤓",
