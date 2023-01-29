@@ -16,8 +16,8 @@ class User : ObservableObject {
         self.taskList = taskList
     }
     
-    func addTask(pName: String, pDuration : Float){
-        let newTask = TBTasks(name: pName, duration: pDuration)
+    func addTask(pName: String,pDescription: String, pDuration : Float){
+        let newTask = TBTasks(name: pName, description: pDescription, duration: pDuration)
         taskList.append(newTask)
     }
     
