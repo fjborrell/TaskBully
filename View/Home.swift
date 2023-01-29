@@ -13,6 +13,7 @@ struct Home: View {
     @State var expandCard: Bool = false
     @State var moveCardDown: Bool = false
     @State var animateContent: Bool = false
+    @EnvironmentObject var user: User
     
     // Matched Geo NameSpace
     @Namespace var animation

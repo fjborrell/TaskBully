@@ -79,7 +79,7 @@ struct SetupView: View {
                 //TO TASK LIST
                 NavigationLink {
                     Home()
-                        .navigationBarBackButtonHidden()
+                        .navigationBarBackButtonHidden().environmentObject(user)
                 } label: {
                     HStack {
                         Text("Finish")

@@ -9,10 +9,12 @@ import Foundation
 
 class TBTasks {
     var name: String
+    var description: String
     var duration: Float
     
-    init(name: String, duration: Float) {
+    init(name: String, description: String, duration: Float) {
         self.name = name
+        self.description = description
         self.duration = duration
     }
 }

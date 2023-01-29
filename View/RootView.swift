@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RootView: View {
     @State private var showHomePage: Bool = false
-    let user: User = User(preferredAnger: .PASSIVEAGGRESSIVE, taskList: [])
+    let user: User = User(preferredAnger: .PASSIVEAGGRESSIVE, taskList: [TBTasks(name: "Laundry", description: "fold cloths", duration: 10)])
 
     
     var body: some View {
