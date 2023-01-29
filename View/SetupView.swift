@@ -92,6 +92,9 @@ struct SetupView: View {
                 .buttonStyle(.bordered)
                 .controlSize(.large)
                 .padding(50)
+                .simultaneousGesture(TapGesture().onEnded {
+                    user.setAnger(pAngerLevel: Int(angerSliderValue))
+                })
             }
         }
     }
