@@ -11,7 +11,7 @@ struct AppLifecycle: View {
     @State private var isActive = true
     @StateObject private var timerManager = TimerManager()
     @StateObject private var sentenceManager = SentenceManager()
-    
+    @EnvironmentObject var user: User
     
     var body: some View {
         Color.clear
@@ -35,6 +35,7 @@ struct AppLifecycle: View {
 
 class SentenceManager: ObservableObject {
     private var sentenceBank: SentenceBank = SentenceBank()
+    
     
     func alertUser() {
         let content = UNMutableNotificationContent()

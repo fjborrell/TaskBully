@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RootView: View {
     @State private var showHomePage: Bool = false
+    let user: User = User(preferredAnger: .PASSIVEAGGRESSIVE, taskList: [])
+
     
     var body: some View {
         NavigationStack {
@@ -39,7 +41,7 @@ struct RootView: View {
                                         
                     //Get Started Button
                     NavigationLink {
-                        SetupView()
+                        SetupView().environmentObject(user)
                     } label: {
                         HStack {
                             Text("Get Started")
@@ -54,7 +56,7 @@ struct RootView: View {
                 }
             }
         }
-        .background(AppLifecycle())
+        .background(AppLifecycle().environmentObject(user))
     }
     
 }

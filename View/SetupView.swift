@@ -11,6 +11,7 @@ import UserNotifications
 struct SetupView: View {
     @State var angerSliderValue: Double = 2
     @State var angerLevel: AngerLevels = .PASSIVEAGGRESSIVE
+    @EnvironmentObject var user: User
     
     var body: some View {
         ZStack {
@@ -88,6 +89,9 @@ struct SetupView: View {
                     .buttonStyle(.bordered)
                     .controlSize(.large)
                     .padding(50)
+                    .onTapGesture {
+                        user.setAnger(pAngerLevel: Int(angerSliderValue))
+                    }
                 }
                 .padding(50)
             }
