@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UserNotifications
 
 
 struct SentenceBank {
@@ -23,15 +24,15 @@ struct SentenceBank {
     
     mutating func get(angerLevel : AngerLevels) -> String {
         if(angerLevel == .ABUSIVE){
-            var sentence = abuse.removeFirst()
+            let sentence = abuse.removeFirst()
             abuse.append(sentence)
             return sentence
         }else if(angerLevel == .ENCOURAGING){
-            var sentence = encourage.removeFirst()
+            let sentence = encourage.removeFirst()
             encourage.append(sentence)
             return sentence
         }else{
-            var sentence = passive.removeFirst()
+            let sentence = passive.removeFirst()
             passive.append(sentence)
             return sentence
         }

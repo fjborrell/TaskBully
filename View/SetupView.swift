@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct SetupView: View {
     @State var angerSliderValue: Double = 2
@@ -38,7 +39,15 @@ struct SetupView: View {
                 
                 VStack {
                     //NOTIFICATION ACCESS
-                    Button(action: {}) {
+                    Button(action: {
+                        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                            if success {
+                                print("All set!")
+                            } else if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }) {
                         Text("Authorize Notifications")
                             .bold()
                         Image(systemName: "bell.badge.fill")
