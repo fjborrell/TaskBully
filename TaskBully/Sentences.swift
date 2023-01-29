@@ -11,10 +11,34 @@ import UserNotifications
 
 
 struct SentenceBank {
-    private var abuse = ["abusive Sentence 1","abusive Sentence 2","abusive Sentence 3","abusive Sentence 4"]
-    private var passive = ["Pass Aggr Sentence 1","Pass Aggr Sentence 2","Pass Aggr Sentence 3","Pass Aggr Sentence 4"]
-    private var encourage = ["Encouraging sentence 1","Encouraging sentence 2","Encouraging sentence 3","Encouraging sentence 4"]
-    
+    private var abuse = ["A fucking break already?",
+                         "Back to work bitch",
+                         "Holy fuck, you're lazy",
+                         "Damn, you are embarrassing 🙈",
+                         "Fuck! again??",
+                         "You probably lost so much money in NFT scams",
+                         "You're fucking hopeless 😂",
+                         "Just drop out already.",
+                         "Back to work four-eyes 🤓",
+                         "Want a knuckle sandwich?👊🥪",
+                         "This you? 🤡"]
+    private var passive = ["Not too concerned, huh?",
+                           "Maybe get some help.",
+                           "Slacking off, huh 👀?",
+                           "Oh, that's your best?",
+                           "Sigh... really? 😬",
+                           "Another day wasted 😅",
+                           "You'd better marry rich."]
+    private var encourage = ["You're doing great!",
+                             "Keep going! You got this!",
+                             "You've gotten so much done today 🤩",
+                             "Great progress!",
+                             "Another hard days work 😤💪",
+                             "You deserve a break.",
+                             "Nice job on that task!",
+                             "Keep up the good work :)",
+                             "I believe in you 🙂"]
+
     init(){
         abuse = abuse.shuffled()
         passive = passive.shuffled()
