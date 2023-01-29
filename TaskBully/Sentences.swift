@@ -8,41 +8,32 @@
 import Foundation
 import SwiftUI
 
+
 struct SentenceBank {
-    @State var sentenceBank: [AngerLevels : [String]] = [:]
-    let a = AbusiveBank()
-    let b = PassiveAggressiveBank()
-    let c = EncouragingBank()
+    private var abuse = ["abusive Sentence 1","abusive Sentence 2","abusive Sentence 3","abusive Sentence 4"]
+    private var passive = ["Pass Aggr Sentence 1","Pass Aggr Sentence 2","Pass Aggr Sentence 3","Pass Aggr Sentence 4"]
+    private var encourage = ["Encouraging sentence 1","Encouraging sentence 2","Encouraging sentence 3","Encouraging sentence 4"]
     
-    init() {
-        populateBank()
+    init(){
+        abuse = abuse.shuffled()
+        passive = passive.shuffled()
+        encourage = encourage.shuffled()
     }
     
-    func populateBank() {
-        self.sentenceBank[.ABUSIVE] = a.abusiveSentences
-        self.sentenceBank[.PASSIVEAGGRESSIVE] = b.passiveAggressiveSentences
-        self.sentenceBank[.ENCOURAGING] = c.encouragingSentences
-    }
     
-    func get() -> [AngerLevels : [String]] {
-        return sentenceBank
+    mutating func get(angerLevel : AngerLevels) -> String {
+        if(angerLevel == .ABUSIVE){
+            var sentence = abuse.removeFirst()
+            abuse.append(sentence)
+            return sentence
+        }else if(angerLevel == .ENCOURAGING){
+            var sentence = encourage.removeFirst()
+            encourage.append(sentence)
+            return sentence
+        }else{
+            var sentence = passive.removeFirst()
+            passive.append(sentence)
+            return sentence
+        }
     }
-}
-
-struct AbusiveBank {
-    let abusiveSentences: [String] = [
-        "You fucking suck"
-    ]
-}
-
-struct PassiveAggressiveBank {
-    let passiveAggressiveSentences: [String] = [
-        "Wow, you're not good at this"
-    ]
-}
-
-struct EncouragingBank {
-    let encouragingSentences: [String] = [
-        "I know this is hard, but you got it!"
-    ]
 }
