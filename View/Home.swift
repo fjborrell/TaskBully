@@ -58,6 +58,38 @@ struct Home: View {
     @ViewBuilder
     func DetailViewContent(item: ColorValue) -> some View{
         VStack(spacing: 0){
+            
+            
+            
+            //BACK BUTTON
+            HStack(spacing: 15){
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.2)){
+                        animateContent = false
+                    }
+                    // slight delay for finishing the animate content
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
+                        withAnimation(.easeInOut(duration: 0.4)){
+                            expandCard = false
+                            moveCardDown = false
+                        }
+                    }
+                }) {
+                    Image(systemName: "arrow.left.circle")
+                    Text("Back")
+                }
+                .buttonStyle(.bordered)
+                .tint(.white)
+            
+                Spacer()
+            }
+            .padding([.bottom, .top], 20)
+            .opacity(animateContent ? 1 : 0)
+            .offset(y: animateContent ? 0 : 100)
+            //slight delay
+            .animation(.easeInOut(duration: 0.4).delay(animateContent ? 0.25 : 0), value: animateContent)
+            
+            //TASK DATA
             Rectangle()
                 .fill(.white)
                 .frame(height: 1)
@@ -82,46 +114,13 @@ struct Home: View {
             .padding(.horizontal,20)
             .frame(maxHeight: .infinity,alignment: .top)
             
-            HStack(spacing: 15){
-                Text("Start")
-                    .fontWeight(.semibold)
-                    .padding(.vertical,20)
-                    .padding(.horizontal,30)
-                    .background {
-                        Capsule()
-                            .fill(.white)
-                    }
-                    .onTapGesture {
-                        print("make this button do something")
-                    }
-                
-                Text("Go Back")
-                    .fontWeight(.semibold)
-                    .padding(.vertical,20)
-                    .padding(.horizontal,30)
-                    .background {
-                        Capsule()
-                            .fill(.white)
-                    }
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.2)){
-                            animateContent = false
-                        }
-                        // slight delay for finishing the naimate content
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
-                            withAnimation(.easeInOut(duration: 0.4)){
-                                expandCard = false
-                                moveCardDown = false
-                            }
-                        }
-                    }
-            }
-            .padding(.bottom,30)
-            .opacity(animateContent ? 1 : 0)
-            .offset(y: animateContent ? 0 : 100)
+            //TASK TIMER
+            TaskTimerView()
+                .padding(.bottom,30)
+                .opacity(animateContent ? 1 : 0)
+                .offset(y: animateContent ? 0 : 100)
             //slight delay
-            .animation(.easeInOut(duration: 0.4).delay(animateContent ? 0.25 : 0), value: animateContent)
-            
+                .animation(.easeInOut(duration: 0.4).delay(animateContent ? 0.25 : 0), value: animateContent)
         }
         .padding(.horizontal,15)
         .frame(maxHeight: .infinity,alignment: .top)
@@ -149,7 +148,7 @@ struct Home: View {
                 .onTapGesture {
                     currentItem = item
                     withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.4, blendDuration: 0.4)){
-                            moveCardDown = true
+                        moveCardDown = true
                     }
                     
                     //after delay start animation
@@ -202,7 +201,8 @@ struct Home: View {
             }
             .padding(20)
         }
-        .padding([.leading,.vertical],15)
+        .padding(.leading, 15)
+        .padding(.vertical, 50)
         .matchedGeometryEffect(id: item.id.uuidString + "DETAILS", in: animation)
     }
     

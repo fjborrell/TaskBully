@@ -18,7 +18,6 @@ struct AppLifecycle: View {
             //SHORT BACKGROUND
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
                 self.isActive = false
-                print("DEBUG: \(sentenceBank.get()[.ABUSIVE]![0])")
                 print("DEBUG: Go back to the app")
             }
             //LONG BACKGROUND (SUSPENDED)
