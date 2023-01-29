@@ -1,4 +1,4 @@
-#Task Bully
+# Task Bully
 
 ## Inspiration
 Our team really wanted to create a new way to maximize productivity without the interference of modern technology. we often find ourselves reaching for our phones to scroll through social media for just a "5 minute break" which quickly turns into a 2 hours procrastination session. On top of that, we wanted the motivation to be delivered in a sarcastic/funny way. Thus, we developed a task manager app that bullies you into working. 
