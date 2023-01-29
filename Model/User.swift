@@ -15,4 +15,14 @@ class User {
         self.preferredAnger = preferredAnger
         self.taskList = taskList
     }
+    
+    func addTask(pName: String, pDuration : Float){
+        let newTask = TBTasks(name: pName, duration: pDuration)
+        taskList.append(newTask)
+    }
+    
+    func setAnger(pAngerLevel : AngerLevels){
+        self.preferredAnger = pAngerLevel
+    }
 }
+
