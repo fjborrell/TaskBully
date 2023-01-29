@@ -10,15 +10,16 @@ import SwiftUI
 struct AppLifecycle: View {
     @State private var isActive = true
     @StateObject private var timerManager = TimerManager()
+    @StateObject private var sentenceManager = SentenceManager()
     
-    let sentenceBank: SentenceBank = SentenceBank()
     
     var body: some View {
         Color.clear
             //SHORT BACKGROUND
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
                 self.isActive = false
-                print("DEBUG: Go back to the app")
+                self.sentenceManager.printMessage()
+            
             }
             //LONG BACKGROUND (SUSPENDED)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
@@ -29,6 +30,14 @@ struct AppLifecycle: View {
                 self.timerManager.stopTimer()
                 print("DEBUG: Welcome back!")
             }
+    }
+}
+
+class SentenceManager: ObservableObject {
+    private var sentenceBank: SentenceBank = SentenceBank()
+    
+    func printMessage() {
+        print(sentenceBank.get(angerLevel: .ABUSIVE))
     }
 }
 
