@@ -13,7 +13,7 @@ struct SetupView: View {
     @State var angerLevel: AngerLevels = .PASSIVEAGGRESSIVE
     @State var authorizedNotifications: Bool = false
     @State var isShowingConsentAlert: Bool = false
-    let userConsentedToBullyMode: Bool = false
+    @State var userConsentedToBullyMode: Bool = false
     @Binding var allowAlerts: Bool
     @EnvironmentObject var user: User
     
@@ -76,33 +76,49 @@ struct SetupView: View {
                     }
                     
                 }
-                .simultaneousGesture(DragGesture().onEnded {_ in
-                    if angerSliderValue == 3 {isShowingConsentAlert = true}
-                })
                 .padding([.leading, .trailing], 50)
-                .alert("Warning!", isPresented: $isShowingConsentAlert) {
-                    Button("OK", role: .cancel) { }
-                }
                 
                 //TO TASK LIST
-                NavigationLink {
-                    Home(allowAlerts: $allowAlerts)
-                        .navigationBarBackButtonHidden().environmentObject(user)
-                } label: {
-                    HStack {
-                        Text("Finish")
-                            .font(.title3.bold())
-                        Image(systemName: "arrow.right.circle")
+                ZStack {
+                    NavigationLink {
+                        Home(allowAlerts: $allowAlerts)
+                            .navigationBarBackButtonHidden().environmentObject(user)
+                    } label: {
+                        HStack {
+                            Text("Finish")
+                                .font(.title3.bold())
+                            Image(systemName: "arrow.right.circle")
+                        }
+                    }
+                    .disabled(!authorizedNotifications)
+                    .tint(.purple)
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
+                    .padding(50)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        user.setAnger(pAngerLevel: Int(angerSliderValue))
+                        
+                    })
+                    
+                    if angerSliderValue == 3 && !userConsentedToBullyMode {
+                        //Invisible Consent Button
+                        Button(action: {
+                            isShowingConsentAlert.toggle()
+                        }) {
+                            Color.clear
+                        }
+                        .frame(width: 125, height: 85)
                     }
                 }
-                .disabled(!authorizedNotifications)
-                .tint(.purple)
-                .buttonStyle(.bordered)
-                .controlSize(.large)
-                .padding(50)
-                .simultaneousGesture(TapGesture().onEnded {
-                    user.setAnger(pAngerLevel: Int(angerSliderValue))
-                    
+                .alert("Warning!", isPresented: $isShowingConsentAlert, actions: {
+                    Button("I Accept", role: .destructive, action: {
+                        userConsentedToBullyMode = true
+                    })
+                    Button("Go Back", role: .cancel, action: {
+                        userConsentedToBullyMode = false
+                    })
+                }, message: {
+                    Text("By setting the app intensity to level three, please confirm that you are OK with receiving messages that some may find mean, uncomfortable, or hurtful")
                 })
             }
         }
