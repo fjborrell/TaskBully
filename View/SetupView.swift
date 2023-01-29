@@ -11,7 +11,10 @@ import UserNotifications
 struct SetupView: View {
     @State var angerSliderValue: Double = 2
     @State var angerLevel: AngerLevels = .PASSIVEAGGRESSIVE
-    @State var authorizedNotifications = false
+    @State var authorizedNotifications: Bool = false
+    @State var isShowingConsentAlert: Bool = false
+    let userConsentedToBullyMode: Bool = false
+    @Binding var allowAlerts: Bool
     @EnvironmentObject var user: User
     
     var body: some View {
@@ -61,24 +64,29 @@ struct SetupView: View {
                 
                 VStack {
                     //ANGER LEVEL SETTER
-                    VStack {
-                        Slider(value: $angerSliderValue, in: 1...3, step: 1)
-                        HStack {
-                            Text("Anger Level:")
-                                .foregroundColor(Color(hex: 0xEDEDED))
-                                .padding(1)
-                            Text("\(intToAnger(levelAsInt: Int(angerSliderValue)))")
-                                .foregroundColor(Color(hex: 0xEDEDED))
-                                .padding(1)
-                                .bold()
-                        }
+                    Slider(value: $angerSliderValue, in: 1...3, step: 1)
+                    HStack {
+                        Text("Anger Level:")
+                            .foregroundColor(Color(hex: 0xEDEDED))
+                            .padding(1)
+                        Text("\(intToAnger(levelAsInt: Int(angerSliderValue)))")
+                            .foregroundColor(Color(hex: 0xEDEDED))
+                            .padding(1)
+                            .bold()
                     }
+                    
                 }
+                .simultaneousGesture(DragGesture().onEnded {_ in
+                    if angerSliderValue == 3 {isShowingConsentAlert = true}
+                })
                 .padding([.leading, .trailing], 50)
+                .alert("Warning!", isPresented: $isShowingConsentAlert) {
+                    Button("OK", role: .cancel) { }
+                }
                 
                 //TO TASK LIST
                 NavigationLink {
-                    Home()
+                    Home(allowAlerts: $allowAlerts)
                         .navigationBarBackButtonHidden().environmentObject(user)
                 } label: {
                     HStack {
@@ -94,6 +102,7 @@ struct SetupView: View {
                 .padding(50)
                 .simultaneousGesture(TapGesture().onEnded {
                     user.setAnger(pAngerLevel: Int(angerSliderValue))
+                    
                 })
             }
         }
@@ -110,11 +119,5 @@ func intToAnger(levelAsInt: Int) -> String {
         return "Bully"
     default:
         return "Passive Aggressive"
-    }
-}
-
-struct SetupView_Previews: PreviewProvider {
-    static var previews: some View {
-        SetupView(angerSliderValue: 0)
     }
 }

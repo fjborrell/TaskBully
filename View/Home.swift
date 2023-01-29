@@ -15,6 +15,7 @@ struct Home: View {
     @State var animateContent: Bool = false
     @State var showModal: Bool = false
     @State var showAddButton: Bool = true
+    @Binding var allowAlerts: Bool
     @EnvironmentObject var user: User
     
     // Matched Geo NameSpace
@@ -155,7 +156,7 @@ struct Home: View {
             .frame(maxHeight: .infinity,alignment: .top)
             
             //TASK TIMER
-            TaskTimerView()
+            TaskTimerView(allowAlerts: $allowAlerts)
                 .padding(.bottom,30)
                 .opacity(animateContent ? 1 : 0)
                 .offset(y: animateContent ? 8 : 50)

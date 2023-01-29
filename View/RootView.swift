@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RootView: View {
     @State private var showHomePage: Bool = false
+    @State var allowAlerts: Bool = false
     let user: User = User(preferredAnger: .PASSIVEAGGRESSIVE, taskList: [TBTasks(name: "Laundry", description: "fold cloths", duration: 10)])
 
     
@@ -41,7 +42,7 @@ struct RootView: View {
                                         
                     //Get Started Button
                     NavigationLink {
-                        SetupView().environmentObject(user)
+                        SetupView(allowAlerts: $allowAlerts).environmentObject(user)
                     } label: {
                         HStack {
                             Text("Get Started")
@@ -56,7 +57,7 @@ struct RootView: View {
                 }
             }
         }
-        .background(AppLifecycle().environmentObject(user))
+        .background(AppLifecycle(allowAlerts: $allowAlerts).environmentObject(user))
     }
     
 }

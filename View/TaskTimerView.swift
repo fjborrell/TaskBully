@@ -11,6 +11,7 @@ struct TaskTimerView: View {
     @StateObject private var vm = ViewModel()
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private let width: Double = 250
+    @Binding var allowAlerts: Bool
     
     var body: some View {
         VStack {
@@ -40,6 +41,7 @@ struct TaskTimerView: View {
                 //START TIMER BUTTON
                 Button(action: {
                     vm.start(minutes: vm.minutes)
+                    allowAlerts.toggle()
                 }) {
                     Text("Start")
                         .bold()
@@ -52,7 +54,10 @@ struct TaskTimerView: View {
                 
                 
                 //RESET TIMER BUTTON
-                Button(action: vm.reset) {
+                Button(action: {
+                    vm.reset()
+                    allowAlerts.toggle()
+                }) {
                     Text("Reset")
                         .bold()
                     Image(systemName: "stop.circle")
@@ -67,11 +72,5 @@ struct TaskTimerView: View {
             vm.updateCountdown()
         }
         
-    }
-}
-
-struct TaskTimerView_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskTimerView()
     }
 }
