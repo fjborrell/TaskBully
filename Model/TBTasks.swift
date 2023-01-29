@@ -9,9 +9,9 @@ import Foundation
 
 class TBTasks {
     var name: String
-    var duration: DateInterval
+    var duration: Double
     
-    init(name: String, duration: DateInterval) {
+    init(name: String, duration: Double) {
         self.name = name
         self.duration = duration
     }
