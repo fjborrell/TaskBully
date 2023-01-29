@@ -30,7 +30,7 @@ struct TaskTimerView: View {
                         .stroke(Color.gray, lineWidth: 4)
                 )
             
-            Slider(value: $vm.minutes, in: 1...60, step: 5)
+            Slider(value: $vm.minutes, in: 0...60, step: 5)
                 .padding()
                 .disabled(vm.isActive)
                 .animation(.easeInOut, value: vm.minutes)
@@ -47,7 +47,7 @@ struct TaskTimerView: View {
                 }
                 .disabled(vm.isActive)
                 .tint(.green)
-                .buttonStyle(.bordered)
+                .buttonStyle(.borderedProminent)
                 .controlSize(.large)
                 
                 
@@ -59,7 +59,7 @@ struct TaskTimerView: View {
                 }
                 .disabled(!vm.isActive)
                 .tint(.red)
-                .buttonStyle(.bordered)
+                .buttonStyle(.borderedProminent)
                 .controlSize(.large)
             }
         }

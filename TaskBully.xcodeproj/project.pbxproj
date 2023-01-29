@@ -18,6 +18,7 @@
 		752808162985F2010061DCCF /* Sentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752808152985F2010061DCCF /* Sentences.swift */; };
 		7528081A298601520061DCCF /* TaskTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75280819298601520061DCCF /* TaskTimerView.swift */; };
 		7528081E29860A720061DCCF /* TaskTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7528081D29860A720061DCCF /* TaskTimerModel.swift */; };
+		75A3A98629864FE0006B0E9B /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A3A98529864FE0006B0E9B /* AddTaskView.swift */; };
 		75AB626F29858CAD0090B311 /* TaskBullyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AB626E29858CAD0090B311 /* TaskBullyApp.swift */; };
 		75AB627329858CAE0090B311 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75AB627229858CAE0090B311 /* Assets.xcassets */; };
 		75AB627629858CAE0090B311 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75AB627529858CAE0090B311 /* Preview Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		752808152985F2010061DCCF /* Sentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentences.swift; sourceTree = "<group>"; };
 		75280819298601520061DCCF /* TaskTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTimerView.swift; sourceTree = "<group>"; };
 		7528081D29860A720061DCCF /* TaskTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTimerModel.swift; sourceTree = "<group>"; };
+		75A3A98529864FE0006B0E9B /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		75AB626B29858CAD0090B311 /* TaskBully.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskBully.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75AB626E29858CAD0090B311 /* TaskBullyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskBullyApp.swift; sourceTree = "<group>"; };
 		75AB627229858CAE0090B311 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				752808022985D0F80061DCCF /* SetupView.swift */,
 				7528080E2985EA920061DCCF /* Home.swift */,
 				75280819298601520061DCCF /* TaskTimerView.swift */,
+				75A3A98529864FE0006B0E9B /* AddTaskView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				752807FF2985A4EE0061DCCF /* Extensions.swift in Sources */,
 				752808012985BFF20061DCCF /* AppLifecycle.swift in Sources */,
 				752808082985E8670061DCCF /* User.swift in Sources */,
+				75A3A98629864FE0006B0E9B /* AddTaskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

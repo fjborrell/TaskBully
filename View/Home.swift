@@ -13,6 +13,8 @@ struct Home: View {
     @State var expandCard: Bool = false
     @State var moveCardDown: Bool = false
     @State var animateContent: Bool = false
+    @State var showModal: Bool = false
+    @State var showAddButton: Bool = true
     @EnvironmentObject var user: User
     
     // Matched Geo NameSpace
@@ -24,36 +26,53 @@ struct Home: View {
             //BACKGROUND
             Color(hex: 0x171717)
             
-            GeometryReader{ proxy in
-                let size = proxy.size
-                
-                ScrollView(.vertical, showsIndicators: false){
-                    VStack(spacing: 8){
-                        ForEach(tasks){task in
-                            CardView(item: task, rectSize: size)
+            VStack {
+                GeometryReader{ proxy in
+                    let size = proxy.size
+                    
+                    ScrollView(.vertical, showsIndicators: false){
+                        VStack(spacing: 8){
+                            ForEach(tasks){task in
+                                CardView(item: task, rectSize: size)
+                            }
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 15)
+                    }
+                    .overlay {
+                        if let currentItem, expandCard{
+                            DetailView(item: currentItem, rectSize: size)
+                                .transition(.asymmetric(insertion: .identity, removal: .offset(y:10)))
                         }
                     }
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 15)
                 }
-                .overlay {
-                    if let currentItem,expandCard{
-                        DetailView(item: currentItem, rectSize: size)
-                            .transition(.asymmetric(insertion: .identity, removal: .offset(y:10)))
+                .frame(width:370, height: 690)
+                .preferredColorScheme(.light)
+                
+                if showAddButton {
+                    Button(action: {
+                        showModal = true
+                    }) {
+                        Text("Add Task")
+                            .font(.title3.bold())
+                        Image(systemName: "calendar.badge.plus")
                     }
+                    .tint(.green)
+                    .padding(.top, 10)
+                    .buttonStyle(.borderedProminent)
                 }
+                
             }
-            .frame(width:370, height: 690)
-            .preferredColorScheme(.light)
+            .sheet(isPresented: $showModal, content: {AddTaskView(showModal: self.$showModal)})
         }
         .ignoresSafeArea()
     }
     
     
     @ViewBuilder
-    func DetailView(item: TBTask, rectSize: CGSize) -> some View{
+    func DetailView(item: TBTask, rectSize: CGSize) -> some View {
         ColorView(item: item, rectSize: rectSize)
-            .ignoresSafeArea()
+            //.ignoresSafeArea()
             .overlay(alignment: .top) {
                 ColorDetails(item: item, rectSize: rectSize)
             }
@@ -68,6 +87,7 @@ struct Home: View {
             //BACK BUTTON
             HStack(spacing: 15){
                 Button(action: {
+                    showAddButton = true
                     withAnimation(.easeInOut(duration: 0.2)){
                         animateContent = false
                     }
@@ -84,7 +104,7 @@ struct Home: View {
                 }
                 .buttonStyle(.bordered)
                 .tint(.white)
-            
+                
                 Spacer()
             }
             .padding([.bottom, .top], 30)
@@ -157,6 +177,7 @@ struct Home: View {
                 .offset(y: tappedCard ? 40 : 0)
                 .zIndex(tappedCard ? 100 : 0)
                 .onTapGesture {
+                    showAddButton = false
                     currentItem = item
                     withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.4, blendDuration: 0.4)){
                         moveCardDown = true
