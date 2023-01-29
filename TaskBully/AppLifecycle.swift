@@ -18,7 +18,7 @@ struct AppLifecycle: View {
             //SHORT BACKGROUND
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
                 self.isActive = false
-                self.sentenceManager.alertUser()
+                self.sentenceManager.alertUser(pAnger: user.getAnger())
             
             }
             //LONG BACKGROUND (SUSPENDED)
@@ -37,10 +37,10 @@ class SentenceManager: ObservableObject {
     private var sentenceBank: SentenceBank = SentenceBank()
     
     
-    func alertUser() {
+    func alertUser(pAnger: AngerLevels) {
         let content = UNMutableNotificationContent()
         content.title = "TaskBully says:"
-        content.subtitle = "\"\(sentenceBank.get(angerLevel: .ABUSIVE))\""
+        content.subtitle = "\"\(sentenceBank.get(angerLevel: pAnger))\""
         content.sound = UNNotificationSound.defaultCritical
         
         // show this notification five seconds from now
