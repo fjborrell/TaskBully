@@ -7,12 +7,35 @@
 
 import Foundation
 
-class User:  {
-    var preferredAnger: AngerLevels
-    var taskList: [TBTasks]
+class User : ObservableObject {
+    @Published var preferredAnger: AngerLevels
+    @Published var taskList: [TBTasks]
     
     init(preferredAnger: AngerLevels, taskList: [TBTasks]) {
         self.preferredAnger = preferredAnger
         self.taskList = taskList
     }
+    
+    func addTask(pName: String, pDuration : Float){
+        let newTask = TBTasks(name: pName, duration: pDuration)
+        taskList.append(newTask)
+    }
+    
+    func setAnger(pAngerLevel : Int){
+        switch pAngerLevel {
+        case 1:
+            preferredAnger = .ENCOURAGING
+        case 2:
+            preferredAnger = .PASSIVEAGGRESSIVE
+        case 3:
+            preferredAnger = .ABUSIVE
+        default:
+            preferredAnger = .PASSIVEAGGRESSIVE
+        }
+    }
+    
+    func getAnger() -> AngerLevels{
+        return preferredAnger
+    }
 }
+
