@@ -23,7 +23,4 @@ We learned front end in Swift (SwiftUI) including how to make animations. We als
 - Incorporate a scheduling/deadline feature to plan when to complete tasks.
 - Include an achievement system based around successfully completing tasks. 
 - Implement even more custom sounds for different intensity levels. 
-- Add a social feature to share success with friends. 
-
-**A "serious" message from TaskBully:**
-Here at TaskBully, our vast team of 2 employees is deeply committed to the goal of replacing bullying with motivation. We are actively looking for sponsorships, investments, and growth opportunities until we can eventually eradicate procrastination.
+- Add a social feature to share success with friends.
