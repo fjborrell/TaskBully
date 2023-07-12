@@ -11,14 +11,14 @@ import UserNotifications
 
 
 struct SentenceBank {
-    private var abuse = ["A fucking break already?",
-                         "You gotta be shitting me...",
-                         "Holy fuck, you're lazy",
-                         "Damn, you are embarrassing 🙈",
-                         "Fuck! again??",
-                         "You're fucking hopeless 😂",
-                         "Just drop out already.",
-                         "Back to work four-eyes 🤓",
+    private var abuse = ["A break already?",
+                         "You gotta be kidding me...",
+                         "Wow, you're lazy",
+                         "Embarrassing 🙈",
+                         "Again!?",
+                         "You're hopeless 😂",
+                         "Might as well give up.",
+                         "Back to work nerd 🤓",
                          "Want a knuckle sandwich?👊🥪",
                          "This you? 🤡"]
     private var passive = ["Not too concerned, huh?",
@@ -26,8 +26,7 @@ struct SentenceBank {
                            "Slacking off, huh 👀?",
                            "Oh, that's your best?",
                            "Sigh... really? 😬",
-                           "Another day wasted 😅",
-                           "You'd better marry rich."]
+                           "Another day wasted 😅"]
     private var encourage = ["You're doing great!",
                              "Keep going! You got this!",
                              "You've gotten so much done today 🤩",
